@@ -117,32 +117,32 @@ dephasage_lambda = 0
 
 
 # Plot des canaux du premier fichier
-plt.plot([t + dephasage_1_1 for t in time1], canal1_1, label=header1[1])
+plt.plot([t + dephasage_1_1 for t in time1] if dephasage_1_1 != 0 else time1, canal1_1, label=header1[1])
 if canal2_1:
-    plt.plot([t + dephasage_2_1 for t in time1], canal2_1, label=header1[2])
+    plt.plot([t + dephasage_2_1 for t in time1] if dephasage_2_1 != 0 else time1, canal2_1, label=header1[2])
 if canal3_1:
-    plt.plot([t + dephasage_3_1 for t in time1], canal3_1, label=header1[3])
+    plt.plot([t + dephasage_3_1 for t in time1] if dephasage_3_1 != 0 else time1, canal3_1, label=header1[3])
 
 # Plot des canaux du deuxième fichier
 if file2:
-    plt.plot([t + dephasage_1_2 for t in time2], canal1_2, label=header2[1])
+    plt.plot([t + dephasage_1_2 for t in time2] if dephasage_1_2 != 0 else time2, canal1_2, label=header2[1])
     if canal2_2:
-        plt.plot([t + dephasage_2_2 for t in time2], canal2_2, label=header2[2])
+        plt.plot([t + dephasage_2_2 for t in time2] if dephasage_2_2 != 0 else time2, canal2_2, label=header2[2])
     if canal3_2:
-        plt.plot([t + dephasage_3_2 for t in time2], canal3_2, label=header2[3])
+        plt.plot([t + dephasage_3_2 for t in time2]  if dephasage_3_2 != 0 else time2, canal3_2, label=header2[3])
 
 # Plot des canaux du troisième fichier
 if file3:
-    plt.plot([t + dephasage_1_3 for t in time3], canal1_3, label=header3[1])
+    plt.plot([t + dephasage_1_3 for t in time3] if dephasage_1_3 != 0 else time3, canal1_3, label=header3[1])
     if canal2_3:
-        plt.plot([t + dephasage_2_3 for t in time3], canal2_3, label=header3[2])
+        plt.plot([t + dephasage_2_3 for t in time3] if dephasage_2_3 != 0 else time3, canal2_3, label=header3[2])
     if canal3_3:
-        plt.plot([t + dephasage_3_3 for t in time3], canal3_3, label=header3[3])
+        plt.plot([t + dephasage_3_3 for t in time3] if dephasage_3_3 != 0 else time3, canal3_3, label=header3[3])
 
 if use_lambda:
     x = [i for i in range(0, 1000)]
     y = [f_lambda(i) for i in x]
-    plt.plot([t + dephasage_lambda for t in x], y, label=label_lambda)
+    plt.plot([t + dephasage_lambda for t in x] if dephasage_lambda != 0 else x, y, label=label_lambda)
 
 # Configurations de l'axe
 if borneSuppAxeY != 0 or borneInfAxeY != 0:
@@ -153,6 +153,6 @@ if borneSuppAxeX != 0 or borneInfAxeX != 0:
 plt.xlabel("Temps [µs]")
 plt.ylabel("Tension [V]")
 plt.legend(loc='upper right')
-plt.savefig("graphique.png")
 plt.grid()
+plt.savefig("graphique.png")
 plt.show()
