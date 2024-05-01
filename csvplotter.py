@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import os
 import numpy as np
 
-def choisir_fichier_csv():
+def choose_csv_file():
     fichiers = os.listdir()
     fichiers_csv = [f for f in fichiers if f.endswith('.csv')]
     if len(fichiers_csv) == 0:
@@ -23,7 +23,7 @@ def choisir_fichier_csv():
         return fichiers_csv[choix], fichiers_csv[choix2], False
     return fichiers_csv[choix], fichiers_csv[choix2], fichiers_csv[choix3]
 
-file1, file2, file3 = choisir_fichier_csv()
+file1, file2, file3 = choose_csv_file()
 
 def process_file(file):
     rows = []
@@ -140,9 +140,9 @@ if file3:
         plt.plot([t + dephasage_3_3 for t in time3] if dephasage_3_3 != 0 else time3, canal3_3, label=header3[3])
 
 if use_lambda:
-    x = [i for i in range(0, 1000)]
-    y = [f_lambda(i) for i in x]
-    plt.plot([t + dephasage_lambda for t in x] if dephasage_lambda != 0 else x, y, label=label_lambda)
+    x = np.arange(1000)
+    y = f_lambda(x)
+    plt.plot(x + dephasage_lambda if dephasage_lambda != 0 else x, y, label=label_lambda)
 
 # Configurations de l'axe
 if borneSuppAxeY != 0 or borneInfAxeY != 0:
