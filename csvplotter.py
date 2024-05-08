@@ -99,10 +99,10 @@ if file3:
         graphe3_3 = True;header3[3] = "Bornes de la résistance";dephasage_3_3=0
 
 # Configuration des bornes des axes X
-borneInfAxeY = 0;borneSuppAxeY = 0 # 0 si pas de borne
+borneInfAxeY = None;borneSuppAxeY = None # None si pas de borne
 
 # Configuration des bornes des axes Y
-borneInfAxeX = 0;borneSuppAxeX = 0 # 0 si pas de borne
+borneInfAxeX = 0;borneSuppAxeX = 5 # None si pas de borne
 
 # Configuration d'une évenbtuelle fonction lambda
 use_lambda = False
@@ -148,9 +148,9 @@ if use_lambda:
     plt.plot(x + dephasage_lambda if dephasage_lambda != 0 else x, y, label=label_lambda)
 
 # Configurations de l'axe
-if borneSuppAxeY != 0 or borneInfAxeY != 0:
+if borneSuppAxeY or borneInfAxeY:
     plt.ylim(borneInfAxeY, borneSuppAxeY) # Pour changer les bornes de l'axe des ordonnées
-if borneSuppAxeX != 0 or borneInfAxeX != 0:
+if borneSuppAxeX or borneInfAxeX:
     plt.xlim(borneInfAxeX, borneSuppAxeX) # Pour changer les bornes de l'axe des abscisses
 
 plt.xlabel("Temps [µs]")
