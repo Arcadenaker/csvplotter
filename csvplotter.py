@@ -76,11 +76,11 @@ if file3:
 ########################## CONFIG ##########################
 
 # Configuration des graphes du premier fichier
-graphe1_1 = True;header1[1] = "Vin";dephasage_1_1=0
+graphe1_1 = False;header1[1] = "Vin";dephasage_1_1=0
 if len(header1) > 2:
     graphe2_1 = False;header1[2] = "Après R";dephasage_2_1=0
 if len(header1) > 3:
-    graphe3_1 = False;header1[3] = "Bornes de la résistance";dephasage_3_1=0
+    graphe3_1 = True;header1[3] = "Bornes de la résistance";dephasage_3_1=0
 
 # Configuration des graphes du deuxième fichier
 if file2:
@@ -92,20 +92,20 @@ if file2:
 
 # Configuration des graphes du troisième fichier
 if file3:
-    graphe1_3 = True;header3[1] = "Vin";dephasage_1_3=0
+    graphe1_3 = False;header3[1] = "Vin";dephasage_1_3=0
     if len(header3) > 2:
         graphe2_3 = False;header3[2] = "Après R";dephasage_2_3=0
     if len(header3) > 3:
-        graphe3_3 = False;header3[3] = "Bornes de la résistance";dephasage_3_3=0
+        graphe3_3 = True;header3[3] = "Bornes de la résistance";dephasage_3_3=0
 
 # Configuration des bornes des axes X
-borneInfAxeY = 0;borneSuppAxeY = 3 # 0 si pas de borne
+borneInfAxeY = 0;borneSuppAxeY = 0 # 0 si pas de borne
 
 # Configuration des bornes des axes Y
-borneInfAxeX = 0;borneSuppAxeX = 200 # 0 si pas de borne
+borneInfAxeX = 0;borneSuppAxeX = 0 # 0 si pas de borne
 
 # Configuration d'une évenbtuelle fonction lambda
-use_lambda = True
+use_lambda = False
 f_lambda = lambda x: np.sin(x/10) + 1
 label_lambda = "SIN X/10 + 1"
 dephasage_lambda = 0
@@ -117,26 +117,29 @@ dephasage_lambda = 0
 
 
 # Plot des canaux du premier fichier
-plt.plot([t + dephasage_1_1 for t in time1] if dephasage_1_1 != 0 else time1, canal1_1, label=header1[1])
-if canal2_1:
+if graphe1_1:
+    plt.plot([t + dephasage_1_1 for t in time1] if dephasage_1_1 != 0 else time1, canal1_1, label=header1[1])
+if canal2_1 and graphe2_1:
     plt.plot([t + dephasage_2_1 for t in time1] if dephasage_2_1 != 0 else time1, canal2_1, label=header1[2])
-if canal3_1:
+if canal3_1 and graphe3_1:
     plt.plot([t + dephasage_3_1 for t in time1] if dephasage_3_1 != 0 else time1, canal3_1, label=header1[3])
 
 # Plot des canaux du deuxième fichier
 if file2:
-    plt.plot([t + dephasage_1_2 for t in time2] if dephasage_1_2 != 0 else time2, canal1_2, label=header2[1])
-    if canal2_2:
+    if graphe1_2:
+        plt.plot([t + dephasage_1_2 for t in time2] if dephasage_1_2 != 0 else time2, canal1_2, label=header2[1])
+    if canal2_2 and graphe2_2:
         plt.plot([t + dephasage_2_2 for t in time2] if dephasage_2_2 != 0 else time2, canal2_2, label=header2[2])
-    if canal3_2:
+    if canal3_2 and graphe3_2:
         plt.plot([t + dephasage_3_2 for t in time2]  if dephasage_3_2 != 0 else time2, canal3_2, label=header2[3])
 
 # Plot des canaux du troisième fichier
 if file3:
-    plt.plot([t + dephasage_1_3 for t in time3] if dephasage_1_3 != 0 else time3, canal1_3, label=header3[1])
-    if canal2_3:
+    if graphe1_3:
+        plt.plot([t + dephasage_1_3 for t in time3] if dephasage_1_3 != 0 else time3, canal1_3, label=header3[1])
+    if canal2_3 and graphe2_3:
         plt.plot([t + dephasage_2_3 for t in time3] if dephasage_2_3 != 0 else time3, canal2_3, label=header3[2])
-    if canal3_3:
+    if canal3_3 and graphe3_3:
         plt.plot([t + dephasage_3_3 for t in time3] if dephasage_3_3 != 0 else time3, canal3_3, label=header3[3])
 
 if use_lambda:
