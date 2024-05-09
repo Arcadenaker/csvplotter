@@ -75,6 +75,8 @@ if file3:
 ############################################################
 ########################## CONFIG ##########################
 
+unite_temps = "ms" # Unité de temps pour l'axe des abscisses
+
 # Configuration des graphes du premier fichier
 graphe1_1 = True
 header1[1] = "Vin"
@@ -122,14 +124,14 @@ if file3:
     if len(header3) > 3:
         graphe3_3 = True
         header3[3] = "Avec condensateur"
-        dephasage_3_3=-0.08
-        decalage_vertical_3_3=-0.07
+        dephasage_3_3=0
+        decalage_vertical_3_3=0
 
 # Configuration des bornes des axes X
 borneInfAxeY = None;borneSuppAxeY = None # None si pas de borne
 
 # Configuration des bornes des axes Y
-borneInfAxeX = 0;borneSuppAxeX = 5 # None si pas de borne
+borneInfAxeX = 0;borneSuppAxeX = 4.5 # None si pas de borne
 
 # Configuration d'une évenbtuelle fonction lambda
 use_lambda = False
@@ -145,18 +147,18 @@ dephasage_lambda = 0
 
 # Plot des canaux du premier fichier
 if graphe1_1:
-    x_data = [t + dephasage_1_1 if dephasage_1_1 != 0 else t for t in time1]
-    y_data = [t + decalage_vertical_1_1 if decalage_vertical_1_1 != 0 else t for t in canal1_1]
+    x_data = [t + dephasage_1_1 if dephasage_1_1 else t for t in time1]
+    y_data = [t + decalage_vertical_1_1 if decalage_vertical_1_1 else t for t in canal1_1]
     plt.plot(x_data, y_data, label=header1[1])
 
 if canal2_1 and graphe2_1:
-    x_data = [t + dephasage_2_1 if dephasage_2_1 != 0 else t for t in time1]
-    y_data = [t + decalage_vertical_2_1 if decalage_vertical_2_1 != 0 else t for t in canal2_1]
+    x_data = [t + dephasage_2_1 if dephasage_2_1 else t for t in time1]
+    y_data = [t + decalage_vertical_2_1 if decalage_vertical_2_1 else t for t in canal2_1]
     plt.plot(x_data, y_data, label=header1[2])
 
 if canal3_1 and graphe3_1:
-    x_data = [t + dephasage_3_1 if dephasage_3_1 != 0 else t for t in time1]
-    y_data = [t + decalage_vertical_3_1 if decalage_vertical_3_1 != 0 else t for t in canal3_1]
+    x_data = [t + dephasage_3_1 if dephasage_3_1 else t for t in time1]
+    y_data = [t + decalage_vertical_3_1 if decalage_vertical_3_1 else t for t in canal3_1]
     plt.plot(x_data, y_data, label=header1[3])
 
 # Plot des canaux du deuxième fichier
@@ -205,7 +207,7 @@ if borneSuppAxeY or borneInfAxeY:
 if borneSuppAxeX or borneInfAxeX:
     plt.xlim(borneInfAxeX, borneSuppAxeX) # Pour changer les bornes de l'axe des abscisses
 
-plt.xlabel("Temps [µs]")
+plt.xlabel(f"Temps [{unite_temps}]")
 plt.ylabel("Tension [V]")
 plt.legend(loc='upper right')
 plt.grid()
