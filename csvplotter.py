@@ -6,12 +6,7 @@ import matplotlib.pyplot as plt
 import os
 import numpy as np
 
-def choose_csv_file():
-    fichiers = os.listdir()
-    fichiers_csv = [f for f in fichiers if f.endswith('.csv')]
-    if len(fichiers_csv) == 0:
-        print("Aucun fichier CSV trouvé dans le répertoire.")
-        exit()
+
     for i, fichier in enumerate(fichiers_csv):
         print(f"{i+1}. {fichier}")
     choix = int(input("Entrez le numéro du premier fichier CSV à utiliser: ")) - 1
